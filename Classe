@@ -1,0 +1,42 @@
+	//**Regra para invalidar CNPJs incorretos**	
+   
+	public static Boolean isValidCNPJ(String cnpj) {
+	if (cnpj == null) {
+		return false;
+	}
+	
+	// remove pontos, traços e barras do CNPJ
+	cnpj = cnpj.replaceAll('[^0-9]', '');
+	
+	if (cnpj.length() != 14) {
+		return false;
+	}
+	
+	int[] pesosPrimeiroDigito = new int[]{5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2};
+	int[] pesosSegundoDigito = new int[]{6, 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2};
+	
+	// cálculo do primeiro dígito verificador
+	Integer soma = 0;
+	for (Integer i = 0; i < 12; i++) {
+		soma += Integer.valueOf(cnpj.substring(i, i+1)) * pesosPrimeiroDigito[i];
+	}
+	Integer resto = soma % 11;
+	Integer primeiroDigitoVerificador = (resto < 2) ? 0 : (11 - resto);
+
+	// cálculo do segundo dígito verificador
+	soma = 0;
+	for (Integer i = 0; i < 13; i++) {
+		soma += Integer.valueOf(cnpj.substring(i, i+1)) * pesosSegundoDigito[i];
+	}
+	resto = soma % 11;
+	Integer segundoDigitoVerificador = (resto < 2) ? 0 : (11 - resto);
+
+	// verificação dos dígitos verificadores
+	if (Integer.valueOf(cnpj.substring(12, 13)) != primeiroDigitoVerificador || 
+//		Integer.valueOf(cnpj.substring(13, 14)) != segundoDigitoVerificador) {
+//		return false;
+//	}
+//
+//	return true;
+//	}
+//}
