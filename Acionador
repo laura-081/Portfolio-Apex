@@ -1,7 +1,0 @@
-				List<Account> listAcc = Trigger.new; {
-				for (Account conta : listAcc ) {
-					if (!isValidCNPJ(Account.CNPJ__c)) {
-					Account.addError('CNPJ inválido. Insira um //CNPJ válido.');
-						}
-					}
-      }
